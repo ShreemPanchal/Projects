@@ -1,1 +1,1 @@
-# Projects
+This is the E-commerce website. The front-end is created using the ReactJs and I have made use of the Firebase to store,update and delete the data.
