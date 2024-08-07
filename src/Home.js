@@ -1,46 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import React, { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "./FirebaseConfig";
-import './App.css';
+import "./App.css";
 import { FaIndianRupeeSign } from "react-icons/fa6";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const productsCollection = collection(db, 'Product Details');
+      const productsCollection = collection(db, "Product Details");
       const productSnapshot = await getDocs(productsCollection);
-      const productList = productSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const productList = productSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setProducts(productList);
     };
 
     fetchProducts();
   }, []);
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className='home-container'>
-      <div className='hero-image'>
-        <div >
-        <img
-          src='https://plus.unsplash.com/premium_photo-1683758342885-7acf321f5d53?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-          height="100vh"
-          width="100vw"
-          alt=''
-        /></div>
-        <div className='hero-text'>
-          <h1>Welcome to Our SmartShop!!</h1>
+    <div className="home-container">
+      <div className="hero-section">
+        <Carousel autoPlay infiniteLoop showThumbs={false}>
+          <div>
+            <img src="https://img.freepik.com/premium-photo/stylish-round-eyeglasses-wooden-podium-glasses-sale-banner_721474-3652.jpg?w=1380" alt="Hero 1"  />
+          </div>
+          <div>https://www.freepik.com/premium-ai-image/straw-hat-sunglasses-pink-teal-background-generative-ai_227222288.htm#from_view=detail_alsolike
+            <img src="" alt="Hero 2" />
+          </div>
+        </Carousel>
+        <div className="hero-text">
+          <h1>Welcome to Beauty And Bling!!</h1>
         </div>
       </div>
-      <div className='product' >
+      <div className="search-bar">
+        <input type="text" placeholder="Search for products..." value={searchQuery} onChange={handleSearch} />
+      </div>
+      <div className="product">
         <h2>Product List</h2>
         <div className="product-list">
-          {products.map((product, index) => (
+          {filteredProducts.map((product, index) => (
             <div className="product-card" key={index}>
               <img src={product.image} alt={product.name} />
               <h3>{product.name}</h3>
               <p>{product.description}</p>
-              <p ><FaIndianRupeeSign />{product.price}</p>
+              <p>
+                <FaIndianRupeeSign />
+                {product.price}
+              </p>
+              <button className="add-to-cart">Add to Cart</button>
             </div>
           ))}
         </div>

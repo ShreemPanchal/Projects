@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./FirebaseConfig";
 import { app } from "./FirebaseConfig";
-
 
 function SignIn() {
   const [data, setData] = useState({
@@ -13,7 +12,7 @@ function SignIn() {
     name: "",
     address: "",
   });
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,9 +52,12 @@ function SignIn() {
       }
 
       // Store user's email in local storage
-      localStorage.setItem("userEmail", user.email);
-      Navigate("/");
-      // <Navigate to="/Home"></Navigate>
+      localStorage.setItem("userEmail", user?.email);
+
+      // Check if the email is admin email and navigate accordingly
+      if (data.email === "admi@gmail.com") {
+        navigate("/Products");
+      }
     } catch (error) {
       console.error("Error signing in or writing to Firestore:", error.message);
     }

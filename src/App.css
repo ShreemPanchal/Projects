@@ -1,87 +1,178 @@
+/* General styles */
 html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* Prevent horizontal scrolling */
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #f4f9f9; /* Soft, neutral background color */
 }
 
-.app {
-  /* display: flex; */
-  flex-direction: column; /* Ensure the app content is stacked vertically */
-  width: 100vw; /* Ensure the app takes full viewport width */
-  height: 100vh;
-  overflow-x: hidden;
-}
-
 /* Navbar styles */
-/* Navbar.css */
-
 .navbar {
-  display: flex; /* Use flexbox for layout */
-  justify-content: space-between; /* Space between the left and right sections */
-  align-items: center; /* Center align the items vertically */
-  position: fixed; /* Fix the navbar at the top */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
   top: 0;
-  width: 100vw; /* Ensure the navbar takes full width */
-  background-color: #ff6f61; /* Vibrant coral background color */
+  width: 100vw;
+  background-color: #ff6f61;
   padding: 1rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  z-index: 100; /* Ensure it stays above other content */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
 }
 
-.navbar-left a,
-.navbar-right a {
-  color: #ffffff; /* White text color */
+.navbar a {
+  color: #ffffff;
   text-decoration: none;
   font-size: 1rem;
-  margin-right: 2rem; /* Space out the links */
-  padding: 0.5rem 1rem; /* Add padding around the links */
-  border-radius: 4px; /* Rounded corners for links */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
+  margin-right: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.navbar-left a:hover,
-.navbar-right a:hover {
-  background-color: #e64a19; /* Darker coral background on hover */
-  color: #ffd54f; /* Light yellow text color on hover */
+.navbar a:hover {
+  background-color: #e64a19;
+  color: #ffd54f;
 }
 
-.navbar-right span {
+.navbar span {
   margin-right: 2rem;
   font-weight: bold;
-  color: #ffffff; /* White text color */
+  color: #ffffff;
 }
 
-/* Adjust link styles for a consistent look */
-.navbar a {
-  display: inline-block;
+/* Hero section styles */
+.hero-section {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.hero-section .carousel .slide img {
+  height: 80vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 32%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  font-size: 6em;
+  font-family:'Dancing Script', cursive;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+/* Search bar styles */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #f0f0f0;
+}
+
+.search-bar input {
+  width: 50%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #ff6f61;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Product list styles */
+.product {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+.product h2 {
+  text-align: center;
+  color: #ff6f61;
+  font-size: 40px;
+  margin-bottom: 1.5rem;
+}
+
+.product-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  width: 100%;
+}
+
+.product-card {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  box-sizing: border-box;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.product-card h3 {
+  margin: 1rem 0 0.5rem;
+  color: #333;
+}
+
+.product-card p {
+  margin: 0.5rem 0;
+  color: #777;
+}
+
+.product-card .add-to-cart {
+  padding: 0.5rem 1rem;
+  background-color: #ff6f61;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-card .add-to-cart:hover {
+  background-color: #e64a19;
 }
 
 /* SignUp.css */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f7f7f7;
-}
-
 .signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  background-color: #e0f2f1; /* Soft teal background color */
-  padding-top: 4rem; /* Add padding to account for the fixed navbar */
-  box-sizing: border-box; /* Include padding and border in element's width and height */
-  overflow-x: hidden; /* Prevent content overflow */
-  position: relative; /* Required for positioning the form */
+  height: 100vh;
+  width: 100vw;
+  background-color: #e0f2f1;
+  padding-top: 4rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  position: relative;
 }
 
 .signup-image {
@@ -93,32 +184,29 @@ body, html {
   background-image: url('https://icoreaustralia.com.au/wp-content/uploads/2021/11/Best-Shipping-Apps-Shopify-Fb-Post-768x402.jpg');
   background-size: cover;
   background-position: center;
-  filter: brightness(70%); /* Darken the image */
+  filter: brightness(70%);
 }
 
 .signup-form {
   position: relative;
-  background-color: #ffffff; /* White background for the form */
+  background-color: #ffffff;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 400px; /* Maximum width of the form */
+  max-width: 400px;
   box-sizing: border-box;
-  z-index: 1; /* Ensure the form is above the background image */
+  z-index: 1;
 }
-
-
 
 .signup-form h2 {
   margin-bottom: 1rem;
-  color: #ff6f61; /* Vibrant coral color for headings */
+  color: #ff6f61;
 }
 
 .input-group {
   margin-bottom: 1rem;
-}
-
+/* SignUp.css continued */
 .input-group label {
   display: block;
   margin-bottom: 0.5rem;
@@ -149,7 +237,6 @@ button:hover {
   background-color: #e64a19; /* Darker coral on hover */
 }
 
-
 /* SignIn.css */
 .signin-container {
   display: flex;
@@ -163,6 +250,7 @@ button:hover {
   overflow-x: hidden; /* Prevent content overflow */
   position: relative;
 }
+
 .signin-image {
   position: absolute;
   top: 0;
@@ -174,7 +262,6 @@ button:hover {
   background-position: center;
   filter: brightness(70%); /* Darken the image */
 }
-
 
 .signin-form {
   position: relative;
@@ -191,17 +278,17 @@ button:hover {
   margin-bottom: 1rem;
   color: #ff6f61; /* Vibrant coral color for headings */
 }
-/*product page css*/
+
+/* Product page css */
 .products-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; /* Center align the content */
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #ffffff;
-
-  
+  margin-top: 50px;
 }
 
 .products-container h2 {
@@ -218,14 +305,14 @@ button:hover {
   width: 100%;
   max-width: 400px; /* Maximum width of the form */
   box-sizing: border-box;
-  margin-top: 40px;
+  margin-top: 80px;
 }
+
 .product-form .input-group textarea {
   padding: 0.5rem;
   border: 1px solid #ef6969;
   border-radius: 4px;
 }
-
 
 /* Home.css */
 .home-container {
@@ -238,23 +325,25 @@ button:hover {
 }
 
 .hero-image img {
-  height: 100vh;
-  width: 100vw;
-  object-fit: cover;
+  height: 80vh;
+  width: 50vw;
+  margin-top: 60px;
+  border-radius: 50%;
+  margin-left: 40%;
+  /* object-fit:cover; */
   filter: brightness(60%); /* Darken the image */
 }
 
 .hero-image {
   position: relative;
   text-align: center;
-  margin-top: 40%;
   margin-bottom: -5%;
 }
 
 .hero-text {
   position: absolute;
   top: 60%;
-  left: 50%;
+  left: 20%;
   transform: translate(-50%, -50%);
   color: white;
   text-align: center;
@@ -320,4 +409,19 @@ button:hover {
 .product-card p {
   margin: 0.5rem 0;
   color: #777;
+}
+
+.product-card .add-to-cart {
+  padding: 0.5rem 1rem;
+  background-color: #ff6f61;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-card .add-to-cart:hover {
+  background-color: #e64a19;
+}
 }

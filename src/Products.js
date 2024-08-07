@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { storage, db } from "./FirebaseConfig";
-import { collection, addDoc, onSnapshot, deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 
 function Products() {
@@ -11,22 +19,33 @@ function Products() {
     price: "",
     image: "",
   });
-  const [productList, setProductList] = useState([]);
   const [products, setProducts] = useState([]);
   const [file, setFile] = useState(null);
-
+  const navigate = useNavigate();
+  const auth = getAuth();
+  console.log(auth);
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "Product Details"), (Snap) => {
-      const productList = Snap.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setProducts(productList);
-      console.log(productList);
-    });
+    //const user = auth?.currentUser;
+    const userEmail = localStorage.getItem("userEmail");
+
+    if (userEmail !== "admi@gmail.com") {
+      navigate("/"); // Redirect non-admin users to the homepage
+    }
+
+    const unsubscribe = onSnapshot(
+      collection(db, "Product Details"),
+      (snap) => {
+        const productList = snap.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProducts(productList);
+        console.log(productList);
+      }
+    );
 
     return () => unsubscribe();
-  }, []);
+  }, [navigate, auth?.currentUser]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,7 +97,11 @@ function Products() {
 
   return (
     <div className="products-container">
-      <form className="product-form" style={{marginTop:"50%"}} onSubmit={handleSubmit}>
+      <form
+        className="product-form"
+        // style={{ marginTop: "20%" }}
+        onSubmit={handleSubmit}
+      >
         <h2>Add a New Product</h2>
         <div className="input-group">
           <label htmlFor="name">Product Name</label>
@@ -113,7 +136,12 @@ function Products() {
           />
         </div>
         <div className="input-group">
-          <input type="file" name="file" placeholder="file" onChange={handleFileChange} />
+          <input
+            type="file"
+            name="file"
+            placeholder="file"
+            onChange={handleFileChange}
+          />
         </div>
         <button type="submit">Add Product</button>
       </form>
