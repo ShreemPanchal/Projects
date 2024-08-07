@@ -39,8 +39,8 @@ function Home() {
           <div>
             <img src="https://img.freepik.com/premium-photo/stylish-round-eyeglasses-wooden-podium-glasses-sale-banner_721474-3652.jpg?w=1380" alt="Hero 1"  />
           </div>
-          <div>https://www.freepik.com/premium-ai-image/straw-hat-sunglasses-pink-teal-background-generative-ai_227222288.htm#from_view=detail_alsolike
-            <img src="" alt="Hero 2" />
+          <div>
+            <img src="https://www.freepik.com/premium-ai-image/straw-hat-sunglasses-pink-teal-background-generative-ai_227222288.htm#from_view=detail_alsolike" alt="Hero 2" />
           </div>
         </Carousel>
         <div className="hero-text">
