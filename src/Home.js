@@ -40,7 +40,7 @@ function Home() {
             <img src="https://img.freepik.com/premium-photo/stylish-round-eyeglasses-wooden-podium-glasses-sale-banner_721474-3652.jpg?w=1380" alt="Hero 1"  />
           </div>
           <div>
-            <img src="https://www.freepik.com/premium-ai-image/straw-hat-sunglasses-pink-teal-background-generative-ai_227222288.htm#from_view=detail_alsolike" alt="Hero 2" />
+            <video src="https://videocdn.cdnpk.net/videos/56024950-db68-4856-a401-dd372c2b715f/horizontal/previews/clear/small.mp4?token=exp=1723048637~hmac=21a558a42f2863c9fe5c8def5fd78722564931922375e7f836719e8947529c08" alt="Hero 2" controls/>
           </div>
         </Carousel>
         <div className="hero-text">
