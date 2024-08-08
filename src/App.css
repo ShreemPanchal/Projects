@@ -160,7 +160,6 @@ html, body {
 .product-card .add-to-cart:hover {
   background-color: #e64a19;
 }
-
 /* SignUp.css */
 .signup-container {
   display: flex;
@@ -168,7 +167,7 @@ html, body {
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #e0f2f1;
+  background-color: #e0f2f1; /* Soft teal background color */
   padding-top: 4rem;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -189,24 +188,25 @@ html, body {
 
 .signup-form {
   position: relative;
-  background-color: #ffffff;
+  background-color: #ffffff; /* White background for the form */
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   width: 100%;
-  max-width: 400px;
+  max-width: 400px; /* Maximum width of the form */
   box-sizing: border-box;
   z-index: 1;
 }
 
 .signup-form h2 {
   margin-bottom: 1rem;
-  color: #ff6f61;
+  color: #ff6f61; /* Coral color for heading */
 }
 
 .input-group {
   margin-bottom: 1rem;
-/* SignUp.css continued */
+}
+
 .input-group label {
   display: block;
   margin-bottom: 0.5rem;
@@ -315,66 +315,80 @@ button:hover {
 }
 
 /* Home.css */
+/* Home.css */
 .home-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 100vw;
   background-color: #f0f0f0; /* Light background color */
+  box-sizing: border-box;
 }
 
-.hero-image img {
-  height: 80vh;
-  width: 50vw;
-  margin-top: 60px;
-  border-radius: 50%;
-  margin-left: 40%;
-  /* object-fit:cover; */
-  filter: brightness(60%); /* Darken the image */
-}
-
-.hero-image {
+.hero-section {
   position: relative;
-  text-align: center;
-  margin-bottom: -5%;
+  width: 100%;
+  height:100%;
+  background-color: #f0f0f0; /* Light background color */
+}
+
+.hero-section .carousel .slide img,
+.hero-section .carousel .slide video {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
 }
 
 .hero-text {
   position: absolute;
-  top: 60%;
-  left: 20%;
+  top: 50%;
+  left: 30%;
   transform: translate(-50%, -50%);
   color: white;
   text-align: center;
-  font-size: 2em;
-  font-family: Arial, sans-serif;
+  font-size: 6em;
+  font-family: 'Dancing Script', cursive;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.search-bar {
+  margin:2rem 0;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.search-bar input {
+  width: 80%;
+  max-width: 600px;
+  padding: 0.75rem;
+  border: 2px solid #ff6f61; /* Coral border */
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
 }
 
 .product {
-  margin-top: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
+  width: 100%;
   padding: 2rem;
   background-color: #ffffff;
 }
 
 .product h2 {
   text-align: center;
-  color: #ff6f61;
-  font-size: 40px;
+  color: #ff6f61; /* Coral color */
+  font-size: 2.5em;
   margin-bottom: 1.5rem;
 }
 
 .product-list {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 2rem;
-  width: 100%;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .product-card {
@@ -413,7 +427,7 @@ button:hover {
 
 .product-card .add-to-cart {
   padding: 0.5rem 1rem;
-  background-color: #ff6f61;
+  background-color: #ff6f61; /* Coral background color */
   color: #ffffff;
   border: none;
   border-radius: 4px;
@@ -422,6 +436,5 @@ button:hover {
 }
 
 .product-card .add-to-cart:hover {
-  background-color: #e64a19;
-}
+  background-color: #e64a19; /* Darker coral on hover */
 }

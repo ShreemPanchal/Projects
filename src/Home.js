@@ -8,6 +8,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Home() {
   const [products, setProducts] = useState([]);
+  //const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -37,10 +38,16 @@ function Home() {
       <div className="hero-section">
         <Carousel autoPlay infiniteLoop showThumbs={false}>
           <div>
-            <img src="https://img.freepik.com/premium-photo/stylish-round-eyeglasses-wooden-podium-glasses-sale-banner_721474-3652.jpg?w=1380" alt="Hero 1"  />
+            <img
+              src="https://img.freepik.com/premium-photo/stylish-round-eyeglasses-wooden-podium-glasses-sale-banner_721474-3652.jpg?w=1380"
+              alt="Hero 1"
+            />
           </div>
           <div>
-            <video src="https://videocdn.cdnpk.net/videos/56024950-db68-4856-a401-dd372c2b715f/horizontal/previews/clear/small.mp4?token=exp=1723048637~hmac=21a558a42f2863c9fe5c8def5fd78722564931922375e7f836719e8947529c08" alt="Hero 2" controls/>
+            <video
+              src="https://videocdn.cdnpk.net/videos/56024950-db68-4856-a401-dd372c2b715f/horizontal/previews/clear/small.mp4?token=exp=1723048637~hmac=21a558a42f2863c9fe5c8def5fd78722564931922375e7f836719e8947529c08"
+              alt="Hero 2"
+            />
           </div>
         </Carousel>
         <div className="hero-text">
@@ -48,7 +55,12 @@ function Home() {
         </div>
       </div>
       <div className="search-bar">
-        <input type="text" placeholder="Search for products..." value={searchQuery} onChange={handleSearch} />
+        <input
+          type="text"
+          placeholder="Search for products..."
+          value={searchQuery}
+          onChange={handleSearch}
+        />
       </div>
       <div className="product">
         <h2>Product List</h2>
