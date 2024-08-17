@@ -5,6 +5,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./FirebaseConfig";
 import { app } from "./FirebaseConfig";
 
+
 function SignIn() {
   const [data, setData] = useState({
     email: "",
@@ -12,6 +13,9 @@ function SignIn() {
     name: "",
     address: "",
   });
+  const [error, setError] = useState(""); // State for error messages
+  const [loading, setLoading] = useState(false); // State for loading spinner
+  const [showPassword, setShowPassword] = useState(false); // State for password visibility
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -24,6 +28,8 @@ function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Show loading spinner
+
     const auth = getAuth(app);
 
     try {
@@ -35,7 +41,7 @@ function SignIn() {
       const user = userCredential.user;
 
       // Set user data in Firestore
-      const docRef = doc(db, "UserData", user.uid); // Assuming user ID is the document ID
+      const docRef = doc(db, "UserData", user.uid);
       await setDoc(docRef, {
         email: data.email,
         password: data.password,
@@ -57,64 +63,88 @@ function SignIn() {
       // Check if the email is admin email and navigate accordingly
       if (data.email === "admin@gmail.com") {
         navigate("/Products");
+      } else {
+        navigate("/Home");
       }
     } catch (error) {
-      console.error("Error signing in or writing to Firestore:", error.message);
+      setError("Invalid email or password."); // Set error message
+    } finally {
+      setLoading(false); // Hide loading spinner
     }
   };
 
   return (
     <div className="signin-container">
-      <div className="signin-image"></div>
-      <div className="signin-form">
-        <h2>Sign In</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label>Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={data.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label>Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={data.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label>Address</label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              value={data.address}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label>Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={data.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <button type="submit">Sign In</button>
-        </form>
+      <div className="signin-content">
+        <div className="signin-form-container">
+          <h2 className="signin-heading">Sign In</h2>
+          {error && <p className="signin-error">{error}</p>}
+          <form onSubmit={handleSubmit} className="signin-form">
+            <div className="input-group">
+              <label>Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={data.name}
+                onChange={handleChange}
+                required
+                className="signin-input"
+              />
+            </div>
+            <div className="input-group">
+              <label>Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={data.email}
+                onChange={handleChange}
+                required
+                className="signin-input"
+              />
+            </div>
+            <div className="input-group">
+              <label>Address</label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={data.address}
+                onChange={handleChange}
+                required
+                className="signin-input"
+              />
+            </div>
+            <div className="input-group">
+              <label>Password</label>
+              <div className="password-container">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  value={data.password}
+                  onChange={handleChange}
+                  required
+                  className="signin-input"
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+            <button type="submit" className="signin-button" disabled={loading}>
+              {loading ? "Signing In..." : "Sign In"}
+            </button>
+            <div className="forgot-password">
+              <a href="/forgot-password">Forgot Password?</a>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

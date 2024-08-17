@@ -13,7 +13,10 @@ function Home() {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [sortOption, setSortOption] = useState("price-asc");
+  const [categoryFilter, setCategoryFilter] = useState("all");
   const { cart, addToCart } = useCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,11 +35,28 @@ function Home() {
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
-  const navigate = useNavigate(); // Create a navigate function
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleSort = (e) => {
+    setSortOption(e.target.value);
+  };
+
+  const handleCategoryFilter = (e) => {
+    setCategoryFilter(e.target.value);
+  };
+
+  const filteredProducts = products
+    .filter((product) => {
+      return (
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        (categoryFilter === "all" || product.category === categoryFilter)
+      );
+    })
+    .sort((a, b) => {
+      if (sortOption === "price-asc") return a.price - b.price;
+      if (sortOption === "price-desc") return b.price - a.price;
+      if (sortOption === "rating") return b.rating - a.rating;
+      return 0;
+    });
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -89,6 +109,19 @@ function Home() {
           onChange={handleSearch}
           className="search-input"
         />
+      </div>
+      <div className="filters">
+        <select onChange={handleSort} value={sortOption} className="sort-select">
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Rating</option>
+        </select>
+        <select onChange={handleCategoryFilter} value={categoryFilter} className="category-select">
+          <option value="all">All Categories</option>
+          <option value="eyewear">Eyewear</option>
+          <option value="makeup">Makeup</option>
+          <option value="jewelry">Jewelry</option>
+        </select>
       </div>
       <div className="product">
         <h2>Product List</h2>

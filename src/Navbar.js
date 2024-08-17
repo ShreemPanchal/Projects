@@ -1,41 +1,48 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import { useCart } from "./cartContext"; // Import useCart to access cart state
-import { FaUser, FaShoppingCart } from 'react-icons/fa';
+import { FaUser, FaShoppingCart, FaSearch, FaBell, FaBars } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 const Navbar = () => {
   const { userEmail } = useContext(AuthContext);
   const { cart } = useCart(); // Access cart state
   const navigate = useNavigate(); // Initialize navigation
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <a href="/">Home</a>
-        <a href="/signup">Sign Up</a>
-        <a href="/signin">Sign In</a>
-        <a href="/Products">Products</a>
+        <a href="/" className="logo">Brand</a>
+        <div className={`navbar-menu ${isMenuOpen ? 'open' : ''}`}>
+          <a href="/">Home</a>
+          <a href="/signup">Sign Up</a>
+          <a href="/signin">Sign In</a>
+          <a href="/Products">Products</a>
+        </div>
       </div>
       <div className="navbar-right">
+        <div className="search-bar">
+          <input type="text" placeholder="Search..." />
+          <FaSearch />
+        </div>
+        <div className="notifications-icon">
+          <FaBell size={24} />
+        </div>
         {userEmail ? (
-          <span>
+          <span className="user-info">
             <FaUser style={{ marginRight: '0.5rem' }} /> {userEmail}
           </span>
         ) : (
           <a href="/signin">Sign In</a>
         )}
-        <div
-          className="cart-icon"
-          onClick={() => navigate('/Cart')} // Navigate to cart page on click
-          style={{ cursor: 'pointer', position: 'relative' }}
-        >
-          <FaShoppingCart size={24} />
-          {cart.length > 0 && (
-            <span className="cart-count">
-              {cart.length}
-            </span>
-          )}
+        
+        <div className="menu-toggle" onClick={handleMenuToggle}>
+          <FaBars size={24} />
         </div>
       </div>
     </nav>
