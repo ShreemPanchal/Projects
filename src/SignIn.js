@@ -55,7 +55,7 @@ function SignIn() {
       localStorage.setItem("userEmail", user?.email);
 
       // Check if the email is admin email and navigate accordingly
-      if (data.email === "admi@gmail.com") {
+      if (data.email === "admin@gmail.com") {
         navigate("/Products");
       }
     } catch (error) {

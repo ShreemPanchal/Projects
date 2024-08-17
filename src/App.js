@@ -7,6 +7,8 @@ import SignIn from "./SignIn";
 import Navbar from "./Navbar";
 import Products from "./Products";
 import { AuthProvider } from "./AuthContext";
+import { CartProvider } from './cartContext';
+import Cart from "./Cart";
 
 function App() {
   const [productList, setProductList] = useState([]);
@@ -17,6 +19,7 @@ function App() {
 
   return (
     <div className="App">
+      <CartProvider>
       <AuthProvider>
         <Router>
           <Navbar />
@@ -28,9 +31,12 @@ function App() {
               path="/Products"
               element={<Products addProduct={addProduct} />}
             />
+            <Route path="/Cart" element={<Cart />} />
           </Routes>
+          
         </Router>
       </AuthProvider>
+      </CartProvider>
     </div>
   );
 }

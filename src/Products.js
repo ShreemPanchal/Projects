@@ -28,7 +28,7 @@ function Products() {
     //const user = auth?.currentUser;
     const userEmail = localStorage.getItem("userEmail");
 
-    if (userEmail !== "admi@gmail.com") {
+    if (userEmail !== "admin@gmail.com") {
       navigate("/"); // Redirect non-admin users to the homepage
     }
 
